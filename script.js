@@ -121,7 +121,7 @@ getData_button.onclick = function () {
   var [point, direction] = getData()
   var v = exp(complex(0,direction))
   var z = complex(point.x, point.y)
-  var [x, y] = getInitCoords(z).map(a => 
+  var [x, y] = getInitCoords(mul(beta(1/3,1/3),z)).map(a => 
     div(a,mul(beta(1/3,1/3),v))
   );
   /* x=div(add(1,exp(complex(0,2*pi/3))),pow(sub(1,pow(complex(0,1),3)),1/3))
@@ -139,7 +139,7 @@ getData_button.onclick = function () {
     y:coords.map(point=>(point[2].re!=0||point[2].im!=0) ? (-div(point[1],point[2]).im) : (null))
   }]
   console.log(data)
-  Plotly.react('right_bottom', data, layout);
-  Plotly.react('right_top', data_2, layout);
+  Plotly.react('right_top', data, layout);
+  Plotly.react('right_bottom', data_2, layout);
 
 }
