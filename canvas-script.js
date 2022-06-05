@@ -28,8 +28,8 @@ context2.scale(scale,-scale);
 
 let figure=[{x:0,y:0},{x:1/2,y:Math.sqrt(3)/6},{x:0,y:Math.sqrt(3)/3}]
 let cursor = {
-    x: 0,
-    y: 0,
+    x: 1/8,
+    y: sqrt(3)/6,
     radius: 20/scale
 }
 let arrowEnd = {
