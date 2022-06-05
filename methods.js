@@ -893,7 +893,7 @@ function weierstrassRoots(g2, g3) {
 
     // p, q both negative in defining cubic
     if (p == 0) {
-      return mul(root(-q, 3), exp(complex(0, 2 * pi * n / 3)))
+      return mul(root(q, 3), exp(complex(0, 2 * pi * n / 3)))
     } else {
       return mul(2 / sqrt(3), sqrt(p),
         cos(sub(div(arccos(mul(3 * sqrt(3) / 2, q, pow(p, -3 / 2))), 3),
@@ -907,11 +907,6 @@ function weierstrassRoots(g2, g3) {
   var e1 = cubicTrigSolution( g2, g3, 0 );
   var e2 = cubicTrigSolution( g2, g3, 1 );
   var e3 = cubicTrigSolution( g2, g3, 2 );
-
-  e1={re:0.21264518514149508236432095281097386883867220294191786297786264038,im:0}
-  e2={re:-0.10632259257074754118216047640548693441933610147095893148893132019,im:0.18415613232497999200029502184660181149264788623218295099232907366}
-  e3={re:-0.10632259257074754118216047640548693441933610147095893148893132019,im:-0.18415613232497999200029502184660181149264788623218295099232907366}
-  
   return [ e1, e2, e3 ];
 
 }
