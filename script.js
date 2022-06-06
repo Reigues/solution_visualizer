@@ -104,10 +104,14 @@ var layout = {
             dash: 'dot'
         }
     }],
-    showlegend: false
+    showlegend: false,
+    hovermode: 'closest'
 };
 
-var config = { responsive: true }
+var config = {
+  responsive: true,
+  displaylogo: false
+}
 
 Plotly.newPlot('right_top', data, layout);
 Plotly.newPlot('right_bottom', data, layout);
@@ -136,13 +140,38 @@ getData_button.onclick = function () {
   var coords = ode(((t,v)=> [pow(v[1], 2), pow(v[0], 2)]),[x, y],[0,100],0.001)
 
   data = [{
-    x: coords.map(point=>(point[1].re!=0||point[1].im!=0) ? (div(point[2],point[1]).re) : (null)),
-    y: coords.map(point=>(point[1].re!=0||point[1].im!=0) ? (div(point[2],point[1]).im) : (null)),
-    mode: "lines"
-  },{x:[div(y,x).re],y:[div(y,x).im], type:"scatter"}]
+    x: coords.map(point=>((point[1].re!=0||point[1].im!=0)&&(abs(div(point[2],point[1]))<1)) ? (div(point[2],point[1]).re) : (null)),
+    y: coords.map(point=>((point[1].re!=0||point[1].im!=0)&&(abs(div(point[2],point[1]))<1)) ? (div(point[2],point[1]).im) : (null)),
+    mode: "lines",
+    line: {
+      color: 'green',
+      width: 1.5
+    }
+  },{
+    x: coords.map(point=>((point[1].re!=0||point[1].im!=0)&&(abs(div(point[2],point[1]))>=1)) ? (div(point[2],point[1]).re) : (null)),
+    y: coords.map(point=>((point[1].re!=0||point[1].im!=0)&&(abs(div(point[2],point[1]))>=1)) ? (div(point[2],point[1]).im) : (null)),
+    mode: "lines",
+    line: {
+      color: 'red',
+      width: 1.5
+    }
+  },{x:[div(y,x).re],y:[div(y,x).im], type:"scatter",marker:{color:'blue'}}]
   data_2 = [{
-    x:coords.map(point=>(point[2].re!=0||point[2].im!=0) ? (div(point[1],point[2]).re) : (null)),
-    y:coords.map(point=>(point[2].re!=0||point[2].im!=0) ? (-div(point[1],point[2]).im) : (null))
+    x:coords.map(point=>((point[2].re!=0||point[2].im!=0)&&(abs(div(point[2],point[1]))<1)) ? (div(point[1],point[2]).re) : (null)),
+    y:coords.map(point=>((point[2].re!=0||point[2].im!=0)&&(abs(div(point[2],point[1]))<1)) ? (-div(point[1],point[2]).im) : (null)),
+    mode: "lines",
+    line: {
+      color: 'green',
+      width: 1.5
+    }
+  },{
+    x:coords.map(point=>((point[2].re!=0||point[2].im!=0)&&(abs(div(point[2],point[1]))>=1)) ? (div(point[1],point[2]).re) : (null)),
+    y:coords.map(point=>((point[2].re!=0||point[2].im!=0)&&(abs(div(point[2],point[1]))>=1)) ? (-div(point[1],point[2]).im) : (null)),
+    mode: "lines",
+    line: {
+      color: 'red',
+      width: 1.5
+    }
   },{x:div(x,y).re,y:-div(x,y).im}]
   console.log(data)
   Plotly.react('right_top', data, layout);
