@@ -103,7 +103,8 @@ var layout = {
             color: 'black',
             dash: 'dot'
         }
-    }]
+    }],
+    showlegend: false
 };
 
 var config = { responsive: true }
@@ -123,7 +124,7 @@ getData_button.onclick = function () {
   var z = complex(point.x, point.y)
   z = add(1/3,mul(z,complex(1/2,sqrt(3)/2)))
   var [x, y] = getInitCoords(mul(beta(1/3,1/3),z)).map(a => 
-    div(a,mul(beta(1/3,1/3),v))
+    mul(a,mul(beta(1/3,1/3),v))
   );
   y=mul(y,complex(-1/2,-sqrt(3)/2))
   /* x=div(add(1,exp(complex(0,2*pi/3))),pow(sub(1,pow(complex(0,1),3)),1/3))
