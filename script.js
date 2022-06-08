@@ -137,7 +137,7 @@ function sync() {
   console.log("point : ")
   console.log({x:div(y,x).re,y:div(y,x).im})
   console.log({x:div(x,y).re,y:-div(x,y).im})
-  var coords = ode(((t,v)=> [pow(v[1], 2), pow(v[0], 2)]),[x, y],[0,100],0.001)
+  var coords = ode(((t,v)=> [pow(v[1], 2), pow(v[0], 2)]),[x, y],[0,100],0.004)
 
   data = [{
     x: coords.map(point=>((point[1].re!=0||point[1].im!=0)&&(abs(div(point[2],point[1]))<1)) ? (div(point[2],point[1]).re) : (null)),
