@@ -113,8 +113,8 @@ var config = {
   displaylogo: false
 }
 
-Plotly.newPlot('right_top', data, layout);
-Plotly.newPlot('right_bottom', data, layout);
+Plotly.newPlot('right_top', data, layout, config);
+Plotly.newPlot('right_bottom', data, layout, config);
 
 function getInitCoords(z){
   var u = weierstrassP(z,0,1/27);
@@ -174,7 +174,7 @@ getData_button.onclick = function () {
     }
   },{x:div(x,y).re,y:-div(x,y).im}]
   console.log(data)
-  Plotly.react('right_top', data, layout);
-  Plotly.react('right_bottom', data_2, layout);
+  Plotly.react('right_top', data, layout, config);
+  Plotly.react('right_bottom', data_2, layout, config);
 
 }

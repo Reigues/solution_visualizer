@@ -203,8 +203,8 @@ function draw_other() {
     }
 }
 
-function angleFromPQ() {
-    return Math.atan(Math.sqrt(3)/((2*p_input.value/q_input.value)-1))
+function angleFromPQ(p,q) {
+    return Math.atan(Math.sqrt(3)/((2*p/q)-1))
 }
 
 function nextPoint(point,direction) {
@@ -243,9 +243,7 @@ function createPoints(){
     }
 }
 
-arrowEnd.arg=angleFromPQ()
-createPoints()
-draw()
+p_qChange()
 
 let inCursor = false;
 let posInCursor = null
@@ -271,6 +269,7 @@ function mouseMove(e) {
     }
     if (posInArrowEnd != null) {
         arrowEnd.arg = posInArrowEnd.arg + initialPos.arg - Math.pow(10,-range_input.value)*(initialPos.arg - Math.atan2((eY - cursor.y - offset.top),(eX - cursor.x - offset.left)))
+        deletePQ()
         createPoints()
     }
     draw(inCursor, inArrowEnd, posInCursor != null, posInArrowEnd != null)
@@ -304,16 +303,27 @@ lineNumber_input.onchange=function(e){
     createPoints()
     draw()
 }
-p_input.onchange=function(){
-    arrowEnd.arg=angleFromPQ()
-    createPoints()
-    draw()
+
+function deletePQ(){
+    p_input.value=""
+    q_input.value=""
+    lineNumber_proposition.innerHTML="NaN"
 }
-q_input.onchange=function(){
-    arrowEnd.arg=angleFromPQ()
-    createPoints()
-    draw()
+
+function p_qChange() {
+    var p = parseInt(p_input.value)
+    var q = parseInt(q_input.value)
+    console.log([p,q])
+    if (!(isNaN(p)||isNaN(q))) {
+        lineNumber_proposition.innerHTML = (Math.abs(2*p-q) + Math.abs(p-2*q) + Math.abs(p+q))/gcd(p,q)
+        arrowEnd.arg=angleFromPQ(p,q)
+        createPoints()
+        draw()
+    }
 }
+
+p_input.onchange=p_qChange;
+q_input.onchange=p_qChange;
 
 window.onresize=function(e){
     context.canvas.width  = 0.5*window.innerWidth;

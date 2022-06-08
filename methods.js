@@ -2401,3 +2401,11 @@ function ode( f, y, [x0,x1], step=.001, method='runge-kutta' ) {
   }
 
 }
+
+var gcd = function(a, b) {
+  if (!b) {
+    return a;
+  }
+
+  return gcd(b, a % b);
+}
