@@ -121,8 +121,8 @@ function getInitCoords(z){
   var v = weierstrassPPrime(z,0,1/27);
   return [div(mul(6,u),add(mul(3,v),1)),div(sub(1,mul(3,v)),add(1,mul(3,v)))] /* 6u/(3v+1),(1-3V)/(1+3V) */
 }
-
-getData_button.onclick = function () {
+getData_button.onclick = sync
+function sync() {
   var [point, direction] = getData()
   var v = mul(exp(complex(0,direction)),complex(-1/2,sqrt(3)/2)) //complex(-1/2,-sqrt(3)/2)
   var z = complex(point.x, point.y)

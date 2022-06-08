@@ -241,6 +241,9 @@ function createPoints(){
         points[i+1]=result!=null ? result.point : null
         last_direction=result!=null ? result.direction : last_direction
     }
+    if(autoSync_button.checked){
+        sync()
+    }
 }
 
 p_qChange()

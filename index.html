@@ -27,16 +27,19 @@
     </div>
     <div style="position:absolute; left:400px; top:10px; width:500px;" class="wrapper">
         <label for="p_input">p = </label>
-        <input type="number" value="1" id="p_input" >
+        <input type="number" value="1" id="p_input" style="width:5em;">
         <label for="q_input">q = </label>
-        <input type="number" value="0" id="q_input">
+        <input type="number" value="0" id="q_input" style="width:5em;">
     </div>
     <div style="position:absolute; left:400px; top:40px; width:500px;" class="wrapper">
         <label for="lineNumber_proposition">Proposition de nombre de lignes :</label>
         <label id="lineNumber_proposition">NaN</label>
     </div>
-    <button id="getData_button" style="position:absolute; top:20px;right: 20px; z-index: 5;">click</button>
-    <input id="autoSync_button" type="checkbox" style="position:absolute; top:40px;right: 20px; z-index: 5;">click</input>
+    <div style="position: absolute; left: calc(50.5% + 20px); top: 10px; width:220px; z-index:5;" class="wrapper">
+        <label for="autoSync_button">Synchronisation automatique : </label>
+        <input id="autoSync_button" type="checkbox" onchange="getData_button.disabled = this.checked; if(this.checked) sync();"></input>
+    </div>
+    <button id="getData_button" style="position:absolute; top:40px; left: calc(50.5% + 20px); z-index: 5;">Synchroniser</button>
 </body>
 <script src="canvas-script.js"></script>
 <script src="script.js"></script>
