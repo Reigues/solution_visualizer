@@ -207,7 +207,8 @@ function angleFromPQ(p,q) {
     return Math.atan(Math.sqrt(3)/((2*p/q)-1))
 }
 
-function nextPoint(point,direction) {
+function nextPoint(point,direction,lasti) {
+    let nexti = null;
     let line = null
     let temp_point={x:point.x+1000*Math.cos(direction),y:point.y+1000*Math.sin(direction)}
     for (let i = 0; i < figure.length; i++) {
@@ -216,10 +217,11 @@ function nextPoint(point,direction) {
         }else{
             ip1=i+1
         }
-        if(doIntersect({u:figure[i],v:figure[ip1]}, {u:{x:point.x+Math.cos(direction)/scale,y:point.y+Math.sin(direction)/scale},v:{x:temp_point.x+Math.cos(direction)/scale,y:temp_point.y+Math.sin(direction)/scale}})){
+        if(lasti!=i && doIntersect({u:figure[i],v:figure[ip1]}, {u:{x:point.x,y:point.y},v:{x:temp_point.x+Math.cos(direction)/scale,y:temp_point.y+Math.sin(direction)/scale}})){
             line={u:figure[i],v:figure[ip1]}
             let result = line_intersect(line, {u:point,v:{x:point.x+Math.cos(direction)/scale,y:point.y+Math.sin(direction)/scale}})
             temp_point = {x:result.x,y:result.y}
+            nexti=i
         }
     }
     /* a1=Math.tan(direction)
@@ -227,17 +229,20 @@ function nextPoint(point,direction) {
     let newPointDirection = null
     if (line!=null) {
         newPointDirection = behavior(temp_point,direction,line)
+        newPointDirection.lasti=nexti
     }
     return newPointDirection
 }
 
 function createPoints(){
+    let lasti=null
     last_direction=arrowEnd.arg
     points=new Array(parseInt(lineNumber_input.value)+1)
     points[0]=cursor
     let result=null
     for (let i = 0; i < points.length-1 && points[i]!=null; i++) {
-        result = nextPoint(points[i],last_direction)
+        result = nextPoint(points[i],last_direction, lasti)
+        lasti=result!=null ? result.lasti : null
         points[i+1]=result!=null ? result.point : null
         last_direction=result!=null ? result.direction : last_direction
     }
@@ -316,9 +321,8 @@ function deletePQ(){
 function p_qChange() {
     var p = parseInt(p_input.value)
     var q = parseInt(q_input.value)
-    console.log([p,q])
     if (!(isNaN(p)||isNaN(q))) {
-        lineNumber_proposition.innerHTML = (Math.abs(2*p-q) + Math.abs(p-2*q) + Math.abs(p+q))/gcd(p,q)
+        lineNumber_proposition.innerHTML = (Math.abs(2*p-q) + Math.abs(p-2*q) + Math.abs(p+q))/gcd(p,q) +1
         arrowEnd.arg=angleFromPQ(p,q)
         createPoints()
         draw()

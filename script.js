@@ -133,10 +133,6 @@ function sync() {
   y=mul(y,complex(-1/2,-sqrt(3)/2))
   /* x=div(add(1,exp(complex(0,2*pi/3))),pow(sub(1,pow(complex(0,1),3)),1/3))
   y=mul(x,complex(0,1)) */
-  console.log([x,y])
-  console.log("point : ")
-  console.log({x:div(y,x).re,y:div(y,x).im})
-  console.log({x:div(x,y).re,y:-div(x,y).im})
   var coords = ode(((t,v)=> [pow(v[1], 2), pow(v[0], 2)]),[x, y],[0,100],0.004)
 
   data = [{
@@ -173,7 +169,6 @@ function sync() {
       width: 1.5
     }
   },{x:div(x,y).re,y:-div(x,y).im}]
-  console.log(data)
   Plotly.react('right_top', data, layout, config);
   Plotly.react('right_bottom', data_2, layout, config);
 
