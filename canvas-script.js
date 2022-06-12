@@ -144,7 +144,7 @@ function draw(highlight_cursor=false, highlight_arrowEnd=false, isCursorModified
     if (isCursorModified) {
         context.fillStyle="black"
         context.font = `${30/scale}px Arial`; 
-        context.fillText(`X = ${(cursor.x-figure[0].x).toFixed(Math.ceil(parseInt(range_input.value)+Math.log10(scale)))}; Y = ${(figure[0].y-cursor.y).toFixed(Math.ceil(parseInt(range_input.value)+Math.log10(scale)))}`, (10-translateX)/scale, (100-translateY)/scale);
+        context.fillText(`X = ${(cursor.x-figure[0].x).toFixed(Math.ceil(parseInt(range_input.value)+Math.log10(scale)))}; Y = ${(cursor.y-figure[0].y).toFixed(Math.ceil(parseInt(range_input.value)+Math.log10(scale)))}`, (10-translateX)/scale, (100-translateY)/scale);
     }
     if (isArrowEndModified) {
         context.fillStyle="black"
