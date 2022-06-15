@@ -133,7 +133,7 @@ function sync() {
   y=mul(y,complex(-1/2,-sqrt(3)/2))
   /* x=div(add(1,exp(complex(0,2*pi/3))),pow(sub(1,pow(complex(0,1),3)),1/3))
   y=mul(x,complex(0,1)) */
-  var coords = ode(((t,v)=> [pow(v[1], 2), pow(v[0], 2)]),[x, y],[0,100],0.004)
+  var coords = ode(((t,v)=> [pow(v[1], 2), pow(v[0], 2)]),[x, y],[0,parseFloat(time_input.value)],parseFloat(step_input.value))
 
   data = [{
     x: coords.map(point=>((point[1].re!=0||point[1].im!=0)&&(abs(div(point[2],point[1]))<1)) ? (div(point[2],point[1]).re) : (null)),
@@ -172,4 +172,21 @@ function sync() {
   Plotly.react('right_top', data, layout, config);
   Plotly.react('right_bottom', data_2, layout, config);
 
+}
+
+step_input.onchange=function(e){
+  if(this.value=="0") this.value = 0.001;
+  sync()
+}
+
+time_input.onchange=function(e){
+  sync()
+}
+
+step_input.onkeydown=function(e){
+  console.log(e)
+  if(e.key=="-") {
+    console.log("-")
+        return false;
+    }
 }

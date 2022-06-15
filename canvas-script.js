@@ -30,7 +30,8 @@ let figure=[{x:0,y:0},{x:1/2,y:Math.sqrt(3)/6},{x:0,y:Math.sqrt(3)/3}]
 let cursor = {
     x: 1/8,
     y: sqrt(3)/6,
-    radius: 20/scale
+    radius: 20/scale,
+    size: 5/scale
 }
 let arrowEnd = {
     arg: 0.713724379, //arctan(sqrt(3)/2)
@@ -93,10 +94,12 @@ function draw(highlight_cursor=false, highlight_arrowEnd=false, isCursorModified
     context.strokeStyle = 'black';
     context.stroke();
     context.beginPath();
-    context.arc(cursor.x, cursor.y, cursor.radius, 0, 2 * Math.PI, false);
+    context.arc(cursor.x, cursor.y, cursor.size, 0, 2 * Math.PI, false);
     context.fillStyle="black"
     context.fill();
     if (highlight_cursor) {
+        context.beginPath()
+        context.arc(cursor.x,cursor.y,cursor.radius,0,2*Math.PI)
         context.lineWidth = 3/scale;
         context.strokeStyle = 'blue';
         context.stroke();
