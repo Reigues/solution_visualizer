@@ -25,7 +25,7 @@
         <label for="range_input">Précision : </label>
         <input type="range" min="0" max="10" value="0" id="range_input">
     </div>
-    <div style="position:absolute; left:10px; top:70px; width:400px;" class="wrapper">
+    <div style="position:absolute; left:10px; top:80px; width:400px;" class="wrapper">
         <label for="time_input">Temps total : </label>
         <input type="number" min="0" value="100" id="time_input" step="any">
     </div>
@@ -39,15 +39,15 @@
         <label for="lineNumber_proposition">Proposition de nombre de lignes :</label>
         <label id="lineNumber_proposition">NaN</label>
     </div>
-    <div style="position: absolute; left: calc(50.5% + 20px); top: 10px; width:220px; z-index:5;" class="wrapper">
+    <div style="position: absolute; left: calc(50.5% + 20px); top: 10px; width:300px; z-index:5;" class="wrapper">
         <label for="autoSync_button">Synchronisation automatique : </label>
         <input id="autoSync_button" type="checkbox" onchange="getData_button.disabled = this.checked; if(this.checked) sync();"></input>
     </div>
-    <button id="getData_button" style="position:absolute; top:40px; left: calc(50.5% + 20px); z-index: 5;">Synchroniser</button>
-    <div style="position: absolute; left: calc(50.5% + 20px); top: 70px; width:220px; z-index:5;" class="wrapper">
+    <div style="position: absolute; left: calc(50.5% + 20px); top: 40px; width:220px; z-index:5;" class="wrapper">
         <label for="step_input">Pas : </label>
         <input id="step_input" type="number" min="0" value="0.001" step="any"></input>
     </div>
+    <button id="getData_button" style="position:absolute; top:70px; left: calc(50.5% + 20px); z-index: 5;">Synchroniser</button>
 </body>
 <script src="canvas-script.js"></script>
 <script src="script.js"></script>
